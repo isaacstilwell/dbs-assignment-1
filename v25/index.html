@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATP Tennis Tracker — live scores, upcoming matches, player profiles, and tournament calendar.">
+  <title>Tennis Tracker V25 — Real Players, Venues & Tournament Images</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PARALLAX BACKGROUND SHAPE LAYER -->
+  <div class="mcm-mem-bg" aria-hidden="true">
+    <!-- Solid geometry -->
+    <div class="bg-shape bs-1"  data-speed="0.10"></div>
+    <div class="bg-shape bs-4"  data-speed="0.14" data-base-rot="45" data-rot-speed="0.008"></div>
+    <div class="bg-shape bs-6"  data-speed="0.28" data-rot-speed="-0.007"></div>
+    <div class="bg-shape bs-7"  data-speed="0.09" data-rot-speed="0.004"></div>
+    <div class="bg-shape bs-10" data-speed="0.06"></div>
+    <div class="bg-shape bs-11" data-speed="-0.18" data-rot-speed="0.005"></div>
+    <div class="bg-shape bs-13" data-speed="0.11"></div>
+    <div class="bg-shape bs-14" data-speed="-0.08"></div>
+    <div class="bg-shape bs-15" data-speed="0.16" data-rot-speed="0.003"></div>
+    <!-- Patterned shapes (polka dots, stripes, checkerboard) -->
+    <div class="bg-shape bs-2"  data-speed="-0.09"></div>
+    <div class="bg-shape bs-3"  data-speed="0.20" data-rot-speed="0.005"></div>
+    <div class="bg-shape bs-5"  data-speed="-0.14"></div>
+    <div class="bg-shape bs-8"  data-speed="0.17"></div>
+    <div class="bg-shape bs-9"  data-speed="-0.12" data-base-rot="30" data-rot-speed="0.010"></div>
+    <div class="bg-shape bs-12" data-speed="0.23" data-base-rot="15" data-rot-speed="-0.006"></div>
+  </div>
+
+  <!-- ① NAV -->
+  <nav class="top-nav" aria-label="Site navigation">
+    <div class="top-nav__inner">
+      <a class="top-nav__back" href="../index.html">← All Versions</a>
+      <span class="top-nav__title">Tennis Tracker</span>
+      <span class="top-nav__version">V25</span>
+    </div>
+  </nav>
+
+  <!-- ② HERO -->
+  <header class="hero">
+    <div class="hero__grid">
+      <div class="hero__left">
+        <p class="hero__eyebrow">ATP Tour · Season 2026</p>
+        <h1 class="hero__title">Tennis<br>Tracker</h1>
+        <span class="hero__divider"></span>
+        <p class="hero__subtitle">Follow every match, track the world's best players, and stay ahead of the season schedule.</p>
+      </div>
+      <div class="hero__right">
+        <div class="hero__stats" id="hero-stats">
+          <div class="stat-block">
+            <span class="stat-block__value">6</span>
+            <span class="stat-block__label">Players Tracked</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-block__value stat-block__value--mustard">11</span>
+            <span class="stat-block__label">Tournaments This Season</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-block__value" id="countdown-value">--</span>
+            <span class="stat-block__label">Until Next Match</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ③ MIAMI OPEN SPOTLIGHT -->
+  <section aria-labelledby="spotlight-heading">
+    <div class="spotlight-header">
+      <div class="spotlight-header__inner">
+        <p class="spotlight-header__eyebrow">In Progress</p>
+        <h2 class="spotlight-header__title" id="spotlight-heading">Miami Open</h2>
+        <div class="spotlight-header__meta" id="spotlight-meta">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+    <div class="spotlight-body">
+      <div class="inner">
+        <p class="spotlight-subtitle">Quarterfinals — Week 2</p>
+        <div class="spotlight-matches" id="spotlight-matches">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ PLAYER PROFILES -->
+  <section class="section" aria-labelledby="players-heading">
+    <div class="inner">
+      <div class="section__header">
+        <div class="section__header-content section__header-content--players">
+          <p class="eyebrow"><span class="eyebrow-dot">●</span> Ranked Players</p>
+          <h2 class="section-title" id="players-heading">Player Profiles</h2>
+        </div>
+      </div>
+      <div class="player-grid" id="player-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ TOURNAMENT CALENDAR -->
+  <section class="section section--alt" aria-labelledby="calendar-heading">
+    <div class="inner">
+      <div class="section__header">
+        <div class="section__header-content">
+          <p class="eyebrow"><span class="eyebrow-dot">●</span> Season 2026</p>
+          <h2 class="section-title" id="calendar-heading">Tournament Calendar</h2>
+        </div>
+      </div>
+      <div id="calendar-table-wrapper">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ UPCOMING MATCHES -->
+  <section class="section" aria-labelledby="upcoming-heading">
+    <div class="inner">
+      <div class="section__header">
+        <div class="section__header-content">
+          <p class="eyebrow"><span class="eyebrow-dot">●</span> On the Horizon</p>
+          <h2 class="section-title" id="upcoming-heading">Upcoming Matches</h2>
+        </div>
+      </div>
+      <div class="schedule-list" id="upcoming-list">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ RECENT RESULTS -->
+  <section class="section section--alt" aria-labelledby="results-heading">
+    <div class="inner">
+      <div class="section__header">
+        <div class="section__header-content">
+          <p class="eyebrow"><span class="eyebrow-dot">●</span> Latest Action</p>
+          <h2 class="section-title" id="results-heading">Recent Results</h2>
+        </div>
+      </div>
+      <div class="results-list" id="results-list">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ VENUES -->
+  <section class="section" aria-labelledby="venues-heading">
+    <div class="inner">
+      <div class="section__header">
+        <div class="section__header-content">
+          <p class="eyebrow"><span class="eyebrow-dot">●</span> Where They Play</p>
+          <h2 class="section-title" id="venues-heading">Venues</h2>
+        </div>
+      </div>
+      <div class="venues-grid" id="venues-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑨ FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__text">Tennis Tracker V25 &mdash; MPCS Design Build Ship &middot; Spring 2026</span>
+      <a class="site-footer__back" href="../index.html">← Back to Gallery</a>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================================
+    //  DATA
+    // ============================================================
+
+    const players = [
+      {
+        id: 'p1',
+        name: 'Carlos Alcaraz',
+        nationality: 'ESP',
+        flag: '🇪🇸',
+        ranking: 1,
+        rankingChange: 0,
+        wins: 30,
+        losses: 6,
+        surface: 'Clay',
+        bio: 'Spanish prodigy and world No. 1 — the youngest man to reach the top ranking in ATP history, with Grand Slam titles on all three surfaces.',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Carlos_Alcaraz_2025_FO.jpg/400px-Carlos_Alcaraz_2025_FO.jpg'
+      },
+      {
+        id: 'p2',
+        name: 'Jannik Sinner',
+        nationality: 'ITA',
+        flag: '🇮🇹',
+        ranking: 2,
+        rankingChange: 0,
+        wins: 32,
+        losses: 4,
+        surface: 'Hard',
+        bio: '2024 Australian Open and US Open champion. Won back-to-back Indian Wells titles in 2025–26, becoming the dominant force on hard courts.',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Jannik_Sinner_2025_US_Open.jpg/400px-Jannik_Sinner_2025_US_Open.jpg'
+      },
+      {
+        id: 'p3',
+        name: 'Novak Djokovic',
+        nationality: 'SRB',
+        flag: '🇷🇸',
+        ranking: 3,
+        rankingChange: +1,
+        wins: 18,
+        losses: 8,
+        surface: 'Hard',
+        bio: 'All-time Grand Slam record holder with 24 majors. Completed the career Golden Slam with Olympic gold at Paris 2024 — the greatest of all time.',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Novak_Djokovic_2024_Paris_Olympics.jpg/400px-Novak_Djokovic_2024_Paris_Olympics.jpg'
+      },
+      {
+        id: 'p4',
+        name: 'Alexander Zverev',
+        nationality: 'GER',
+        flag: '🇩🇪',
+        ranking: 4,
+        rankingChange: -1,
+        wins: 24,
+        losses: 8,
+        surface: 'Clay',
+        bio: 'Germany\'s world No. 4 and 2025 Roland Garros champion. Known for a devastating serve and an increasingly complete all-court game.',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/2022_Alexander_Zverev_9SC4939_%28cropped%29.jpg/400px-2022_Alexander_Zverev_9SC4939_%28cropped%29.jpg'
+      },
+      {
+        id: 'p5',
+        name: 'Lorenzo Musetti',
+        nationality: 'ITA',
+        flag: '🇮🇹',
+        ranking: 5,
+        rankingChange: +2,
+        wins: 20,
+        losses: 10,
+        surface: 'Clay',
+        bio: 'Elegant 23-year-old with a one-handed backhand built for clay. Olympic bronze medalist at Paris 2024 and two-time Davis Cup champion with Italy.',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Musetti_MCM23_%2811%29_%2852883593753%29.jpg/400px-Musetti_MCM23_%2811%29_%2852883593753%29.jpg'
+      },
+      {
+        id: 'p6',
+        name: 'Alex de Minaur',
+        nationality: 'AUS',
+        flag: '🇦🇺',
+        ranking: 6,
+        rankingChange: 0,
+        wins: 18,
+        losses: 10,
+        surface: 'Hard',
+        bio: 'Australia\'s No. 1 — one of the fastest movers on tour with an elite defensive game. Eleven ATP titles and a career-high ranking of No. 6.',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Alex_de_Minaur_2024.jpg/400px-Alex_de_Minaur_2024.jpg'
+      }
+    ];
+
+    const venues = [
+      { id: 'v1', name: 'Hard Rock Stadium',           city: 'Miami',       country: 'United States', surface: 'Hard',  capacity: 13800, surfaceColor: '#1A5276', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Keybiscaynemaincourt.jpg/960px-Keybiscaynemaincourt.jpg' },
+      { id: 'v2', name: 'Court Rainier III',           city: 'Monte-Carlo', country: 'Monaco',        surface: 'Clay',  capacity: 10000, surfaceColor: '#C0442A', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Monte-Carlo_Masters.jpg/960px-Monte-Carlo_Masters.jpg' },
+      { id: 'v3', name: 'Court Philippe-Chatrier',     city: 'Paris',       country: 'France',        surface: 'Clay',  capacity: 15059, surfaceColor: '#C0442A', photo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Paris_Court_Philippe-Chatrier.jpg' },
+      { id: 'v4', name: 'Centre Court',                city: 'London',      country: 'United Kingdom', surface: 'Grass', capacity: 14979, surfaceColor: '#2D6B47', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Centre_court_2006.JPG/960px-Centre_court_2006.JPG' },
+      { id: 'v5', name: 'Caja Mágica — Manolo Santana',city: 'Madrid',      country: 'Spain',         surface: 'Clay',  capacity: 12442, surfaceColor: '#C0442A', photo: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Panoramica_caja_magica.jpg' },
+      { id: 'v6', name: 'River Oaks Country Club',     city: 'Houston',     country: 'United States', surface: 'Clay',  capacity: 7500,  surfaceColor: '#C0442A', photo: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/RiverOaksCountryClub.JPG' }
+    ];
+
+    const tournaments = [
+      { id: 't1',  name: 'Miami Open',                        location: 'Miami, USA',           startDate: '2026-03-19', endDate: '2026-03-30', surface: 'Hard',  tier: 'Masters 1000', status: 'active',   photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Keybiscaynemaincourt.jpg/960px-Keybiscaynemaincourt.jpg' },
+      { id: 't2',  name: 'Marrakech Open',                    location: 'Marrakech, Morocco',   startDate: '2026-04-07', endDate: '2026-04-13', surface: 'Clay',  tier: 'ATP 250',      status: 'upcoming', photo: null },
+      { id: 't3',  name: "US Men's Clay Court Championship",  location: 'Houston, USA',         startDate: '2026-04-07', endDate: '2026-04-13', surface: 'Clay',  tier: 'ATP 250',      status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/RiverOaksCountryClub.JPG' },
+      { id: 't4',  name: 'BCR Open Romania',                  location: 'Bucharest, Romania',   startDate: '2026-04-07', endDate: '2026-04-13', surface: 'Clay',  tier: 'ATP 250',      status: 'upcoming', photo: null },
+      { id: 't5',  name: 'Monte-Carlo Masters',               location: 'Monte-Carlo, Monaco',  startDate: '2026-04-13', endDate: '2026-04-20', surface: 'Clay',  tier: 'Masters 1000', status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Monte-Carlo_Masters.jpg/960px-Monte-Carlo_Masters.jpg' },
+      { id: 't6',  name: 'Barcelona Open Banc Sabadell',      location: 'Barcelona, Spain',     startDate: '2026-04-21', endDate: '2026-04-27', surface: 'Clay',  tier: 'ATP 500',      status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/SchwartzmanvsMcDonaldGodo2022.jpg/960px-SchwartzmanvsMcDonaldGodo2022.jpg' },
+      { id: 't7',  name: 'Mutua Madrid Open',                 location: 'Madrid, Spain',        startDate: '2026-04-27', endDate: '2026-05-04', surface: 'Clay',  tier: 'Masters 1000', status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Panoramica_caja_magica.jpg' },
+      { id: 't8',  name: "Internazionali BNL d'Italia",       location: 'Rome, Italy',          startDate: '2026-05-11', endDate: '2026-05-18', surface: 'Clay',  tier: 'Masters 1000', status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Foro_Italico_%E2%80%93_Central_Tennis_Court.jpg/960px-Foro_Italico_%E2%80%93_Central_Tennis_Court.jpg' },
+      { id: 't9',  name: 'Roland Garros',                     location: 'Paris, France',        startDate: '2026-05-25', endDate: '2026-06-08', surface: 'Clay',  tier: 'Grand Slam',   status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Paris_Court_Philippe-Chatrier.jpg' },
+      { id: 't10', name: 'cinch Championships',               location: 'London, UK',           startDate: '2026-06-09', endDate: '2026-06-15', surface: 'Grass', tier: 'ATP 500',      status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Queens_Club_Centre_Court.jpg/960px-Queens_Club_Centre_Court.jpg' },
+      { id: 't11', name: 'Wimbledon',                         location: 'London, UK',           startDate: '2026-06-30', endDate: '2026-07-13', surface: 'Grass', tier: 'Grand Slam',   status: 'upcoming', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Centre_court_2006.JPG/960px-Centre_court_2006.JPG' }
+    ];
+
+    const spotlightMatches = [
+      { id: 's1', player1Id: 'p1', player2Id: 'p4', winnerId: 'p1', score: '7–5, 6–3',           round: 'QF', date: '2026-03-25', status: 'completed' },
+      { id: 's2', player1Id: 'p2', player2Id: 'p5', winnerId: 'p2', score: '6–4, 6–7(3), 6–2',   round: 'QF', date: '2026-03-25', status: 'completed' },
+      { id: 's3', player1Id: 'p3', player2Id: 'p6', winnerId: null, score: 'Mar 27 · 14:00',      round: 'QF', date: '2026-03-27', status: 'upcoming'  },
+      { id: 's4', player1Id: 'p1', player2Id: 'p2', winnerId: null, score: 'Mar 28 · 17:00',      round: 'SF', date: '2026-03-28', status: 'upcoming'  }
+    ];
+
+    const upcomingMatches = [
+      { id: 'u1', player1Id: 'p3', player2Id: 'p6', tournamentId: 't1', date: '2026-03-27', time: '14:00', round: 'QF'  },
+      { id: 'u2', player1Id: 'p1', player2Id: 'p2', tournamentId: 't1', date: '2026-03-28', time: '17:00', round: 'SF'  },
+      { id: 'u3', player1Id: 'p3', player2Id: 'p6', tournamentId: 't1', date: '2026-03-29', time: '17:00', round: 'SF'  },
+      { id: 'u4', player1Id: 'p5', player2Id: 'p6', tournamentId: 't3', date: '2026-04-07', time: '12:00', round: 'R1'  },
+      { id: 'u5', player1Id: 'p1', player2Id: 'p3', tournamentId: 't5', date: '2026-04-14', time: '14:00', round: 'R32' }
+    ];
+
+    const recentResults = [
+      { id: 'r1', player1Id: 'p2', player2Id: 'p5', winnerId: 'p2', score: '6–4, 6–7(3), 6–2', date: '2026-03-25', tournamentId: 't1', round: 'Quarterfinal',  duration: '2h 18m' },
+      { id: 'r2', player1Id: 'p1', player2Id: 'p4', winnerId: 'p1', score: '7–5, 6–3',           date: '2026-03-25', tournamentId: 't1', round: 'Quarterfinal',  duration: '1h 44m' },
+      { id: 'r3', player1Id: 'p3', player2Id: 'p4', winnerId: 'p3', score: '6–1, 6–2',           date: '2026-03-23', tournamentId: 't1', round: 'Round of 16',   duration: '1h 02m' },
+      { id: 'r4', player1Id: 'p6', player2Id: 'p5', winnerId: 'p6', score: '7–6(5), 6–4',        date: '2026-03-22', tournamentId: 't1', round: 'Round of 16',   duration: '1h 58m' },
+      { id: 'r5', player1Id: 'p5', player2Id: 'p1', winnerId: 'p1', score: '4–6, 6–3, 6–4, 6–2', date: '2026-03-21', tournamentId: 't1', round: 'Round of 16',  duration: '2h 31m' }
+    ];
+
+    // ============================================================
+    //  HELPERS
+    // ============================================================
+
+    const getPlayer     = id => players.find(p => p.id === id);
+    const getTournament = id => tournaments.find(t => t.id === id);
+    const winRate       = (w, l) => Math.round(w / (w + l) * 100);
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+
+    function formatDateShort(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatDateRange(start, end) {
+      const s = new Date(start + 'T12:00:00');
+      const e = new Date(end   + 'T12:00:00');
+      return `${s.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${e.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    }
+
+    function surfaceBadge(surface) {
+      return `<span class="badge-surface badge-surface--${surface.toLowerCase()}">${surface}</span>`;
+    }
+
+    function tierBadge(tier) {
+      const map = { 'Grand Slam': 'grand-slam', 'Masters 1000': 'masters', 'ATP 500': 'atp500', 'ATP 250': 'atp250' };
+      return `<span class="badge-tier badge-tier--${map[tier] || 'atp250'}">${tier}</span>`;
+    }
+
+    function rankChangeBadge(change) {
+      if (change > 0) return `<span class="rank-change rank-change--up">▲${change}</span>`;
+      if (change < 0) return `<span class="rank-change rank-change--down">▼${Math.abs(change)}</span>`;
+      return `<span class="rank-change rank-change--same">—</span>`;
+    }
+
+    function miniAvatar(player) {
+      return `<div class="mini-avatar"><img src="${player.photo}" alt="${player.name}" loading="lazy"></div>`;
+    }
+
+    // ============================================================
+    //  RENDER: SPOTLIGHT
+    // ============================================================
+
+    function renderSpotlight() {
+      document.getElementById('spotlight-meta').innerHTML = `
+        <span class="badge-live">In Progress</span>
+        ${surfaceBadge('Hard')}
+        ${tierBadge('Masters 1000')}
+        <span style="font-size:0.75rem;color:rgba(253,250,245,0.8);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;">Hard Rock Stadium · Miami, FL</span>
+      `;
+
+      document.getElementById('spotlight-matches').innerHTML = spotlightMatches.map(m => {
+        const p1 = getPlayer(m.player1Id), p2 = getPlayer(m.player2Id);
+        const isCompleted = m.status === 'completed';
+        const p1Winner = m.winnerId === p1.id;
+        const badgeCls = isCompleted ? 'spotlight-row__round-badge--completed' : 'spotlight-row__round-badge--upcoming';
+        const p1Cls = isCompleted ? (p1Winner ? 'spotlight-row__player-name--winner' : 'spotlight-row__player-name--loser') : '';
+        const p2Cls = isCompleted ? (!p1Winner ? 'spotlight-row__player-name--winner' : 'spotlight-row__player-name--loser') : '';
+        return `
+          <div class="spotlight-row">
+            <div class="spotlight-row__round-badge ${badgeCls}">${m.round}</div>
+            <div class="spotlight-row__players">
+              ${miniAvatar(p1)}
+              <span class="spotlight-row__player-name ${p1Cls}">${p1.name}</span>
+              <span class="spotlight-row__vs">vs</span>
+              <span class="spotlight-row__player-name ${p2Cls}">${p2.name}</span>
+              ${miniAvatar(p2)}
+            </div>
+            <div class="spotlight-row__score ${isCompleted ? '' : 'spotlight-row__score--upcoming'}">${m.score}</div>
+          </div>`;
+      }).join('');
+    }
+
+    // ============================================================
+    //  RENDER: PLAYERS
+    // ============================================================
+
+    function renderPlayers() {
+      document.getElementById('player-grid').innerHTML = players.map(p => {
+        const pct = winRate(p.wins, p.losses);
+        const surfaceCls = p.surface === 'Grass' ? 'badge-surface--grass' : p.surface === 'Clay' ? 'badge-surface--clay' : 'badge-surface--hard';
+        return `
+          <article class="player-card">
+            <div class="player-card__top">
+              <div class="player-card__rank-badge">${p.ranking}</div>
+              <div class="player-card__photo"><img src="${p.photo}" alt="${p.name}" loading="lazy"></div>
+              <div class="player-card__identity">
+                <h3 class="player-card__name">${p.name}</h3>
+                <div class="player-card__meta-row">
+                  <span class="player-card__flag">${p.flag}</span>
+                  <span class="player-card__nationality">${p.nationality}</span>
+                  <span class="badge-surface ${surfaceCls} player-card__surface-badge">${p.surface}</span>
+                  ${rankChangeBadge(p.rankingChange)}
+                </div>
+              </div>
+            </div>
+            <div class="player-card__body">
+              <div class="player-card__stat"><span class="player-card__stat-value">${p.wins}</span><span class="player-card__stat-label">Wins</span></div>
+              <div class="player-card__stat"><span class="player-card__stat-value player-card__stat-value--mustard">${pct}%</span><span class="player-card__stat-label">Win Rate</span></div>
+              <div class="player-card__stat"><span class="player-card__stat-value" style="font-size:1.1rem;color:var(--teal);">${p.losses}</span><span class="player-card__stat-label">Losses</span></div>
+              <div class="player-card__stat"><span class="player-card__stat-value" style="font-size:1.1rem;">${p.wins + p.losses}</span><span class="player-card__stat-label">Matches</span></div>
+              <p class="player-card__bio">${p.bio}</p>
+            </div>
+          </article>`;
+      }).join('');
+    }
+
+    // ============================================================
+    //  RENDER: TOURNAMENT CALENDAR
+    // ============================================================
+
+    function renderCalendar() {
+      const rows = tournaments.map(t => {
+        const isActive = t.status === 'active';
+        const statusCell = isActive
+          ? `<span class="badge-live">In Progress</span>`
+          : `<span style="color:var(--teal);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">Upcoming</span>`;
+        const thumb = t.photo
+          ? `<div class="td-thumb"><img src="${t.photo}" alt="${t.name}" loading="lazy"></div>`
+          : `<div class="td-thumb td-thumb--empty" style="background:${t.surface === 'Grass' ? 'var(--teal)' : t.surface === 'Hard' ? '#1A5276' : 'var(--accent)'};"></div>`;
+        return `
+          <tr class="${isActive ? 'row--active' : ''}">
+            <td class="td--thumb">${thumb}</td>
+            <td class="td--name">${t.name}</td>
+            <td class="td--location">${t.location}</td>
+            <td class="td--dates">${formatDateRange(t.startDate, t.endDate)}</td>
+            <td class="td--surface">${surfaceBadge(t.surface)}</td>
+            <td class="td--tier">${tierBadge(t.tier)}</td>
+            <td class="td--status">${statusCell}</td>
+          </tr>`;
+      }).join('');
+      document.getElementById('calendar-table-wrapper').innerHTML = `
+        <table class="calendar-table">
+          <thead><tr><th></th><th>Tournament</th><th>Location</th><th>Dates</th><th>Surface</th><th>Tier</th><th>Status</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    // ============================================================
+    //  RENDER: UPCOMING MATCHES
+    // ============================================================
+
+    function renderUpcoming() {
+      document.getElementById('upcoming-list').innerHTML = upcomingMatches.map(m => {
+        const p1 = getPlayer(m.player1Id), p2 = getPlayer(m.player2Id), t = getTournament(m.tournamentId);
+        return `
+          <div class="schedule-row">
+            <div class="schedule-row__date"><strong>${formatDateShort(m.date)}</strong><span>${m.time} local</span></div>
+            <div class="schedule-row__matchup">
+              <span class="schedule-row__player">${p1.flag} ${p1.name}</span>
+              <span class="schedule-row__vs">vs</span>
+              <span class="schedule-row__player">${p2.flag} ${p2.name}</span>
+            </div>
+            <div class="schedule-row__meta">
+              ${surfaceBadge(t.surface)}
+              <span class="schedule-row__round">${m.round}</span>
+              <span class="schedule-row__tournament">${t.name}</span>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ============================================================
+    //  RENDER: RECENT RESULTS
+    // ============================================================
+
+    function renderResults() {
+      document.getElementById('results-list').innerHTML = recentResults.map(r => {
+        const p1 = getPlayer(r.player1Id), p2 = getPlayer(r.player2Id), t = getTournament(r.tournamentId);
+        const p1Win = r.winnerId === p1.id;
+        return `
+          <div class="result-row">
+            <span class="result-row__date">${formatDate(r.date)}</span>
+            <span class="result-row__player ${p1Win ? 'result-row__player--winner' : 'result-row__player--loser'}">${p1.flag} ${p1.name}</span>
+            <span class="result-row__score">${r.score}</span>
+            <span class="result-row__player ${!p1Win ? 'result-row__player--winner' : 'result-row__player--loser'}">${p2.flag} ${p2.name}</span>
+            <div class="result-row__meta"><strong>${r.round}</strong>${t.name} · ${r.duration}</div>
+          </div>`;
+      }).join('');
+    }
+
+    // ============================================================
+    //  RENDER: VENUES
+    // ============================================================
+
+    function renderVenues() {
+      document.getElementById('venues-grid').innerHTML = venues.map(v => {
+        const surfaceCls = v.surface === 'Grass' ? 'badge-surface--grass' : v.surface === 'Clay' ? 'badge-surface--clay' : 'badge-surface--hard';
+        return `
+          <div class="venue-card">
+            <div class="venue-card__img-wrap">
+              <img src="${v.photo}" alt="${v.name}" loading="lazy">
+              <span class="venue-card__surface-bar" style="background:${v.surfaceColor};"></span>
+            </div>
+            <h3 class="venue-card__name">${v.name}</h3>
+            <p class="venue-card__location">${v.city}, ${v.country}</p>
+            <div class="venue-card__stats">
+              <span class="badge-surface ${surfaceCls}">${v.surface}</span>
+              <span class="venue-card__capacity"><strong>${v.capacity.toLocaleString()}</strong> capacity</span>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ============================================================
+    //  COUNTDOWN
+    // ============================================================
+
+    function startCountdown() {
+      const el = document.getElementById('countdown-value');
+      const next = upcomingMatches
+        .map(m => new Date(`${m.date}T${m.time}:00`))
+        .filter(d => d > new Date())
+        .sort((a, b) => a - b)[0];
+      if (!next) { el.textContent = 'TBD'; return; }
+      function update() {
+        const diff = next - new Date();
+        if (diff <= 0) { el.textContent = 'Now'; return; }
+        const days = Math.floor(diff / 86400000), hours = Math.floor((diff % 86400000) / 3600000), mins = Math.floor((diff % 3600000) / 60000);
+        if (days > 0) el.textContent = `${days}d ${hours}h`;
+        else if (hours > 0) el.textContent = `${hours}h ${mins}m`;
+        else el.textContent = `${mins}m`;
+      }
+      update();
+      setInterval(update, 60000);
+    }
+
+    // ============================================================
+    //  ANIMATIONS
+    // ============================================================
+
+    function initAnimations() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      function tag(el, cls, staggerMs) {
+        el.classList.add(cls);
+        if (staggerMs) el.style.setProperty('--stagger', staggerMs + 'ms');
+      }
+      function staggerGroup(selector, cls, stepMs = 80, offsetMs = 0) {
+        document.querySelectorAll(selector).forEach((el, i) => tag(el, cls, offsetMs + i * stepMs));
+      }
+      document.querySelectorAll('.section-title, .spotlight-header__title').forEach(el => tag(el, 'reveal-rise'));
+      document.querySelectorAll('.eyebrow, .spotlight-subtitle').forEach(el => tag(el, 'reveal-rise'));
+      document.querySelectorAll('hr.rule').forEach(el => tag(el, 'reveal-rule'));
+      staggerGroup('.player-card', 'reveal-stamp', 80);
+      staggerGroup('.venue-card',  'reveal-stamp', 60);
+      staggerGroup('.player-card__rank-badge', 'reveal-badge', 80, 100);
+      staggerGroup('.spotlight-row',  'reveal-rise', 60);
+      staggerGroup('.schedule-row',   'reveal-rise', 50);
+      staggerGroup('.result-row',     'reveal-rise', 50);
+      staggerGroup('.calendar-table tbody tr', 'reveal-rise', 30);
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.reveal-rise, .reveal-rule, .reveal-stamp, .reveal-badge').forEach(el => observer.observe(el));
+    }
+
+    // ============================================================
+    //  SECTION COLOR TABS
+    // ============================================================
+
+    function initSectionTabs() {
+      const colors = ['#D4541A', '#E2B040', '#2B7A72', '#D4541A', '#E2B040', '#2B7A72', '#D4541A', '#E2B040'];
+      const bgs    = [
+        'rgba(212, 84, 26, 0.10)',
+        'rgba(226, 176, 64, 0.18)',
+        'rgba(43, 122, 114, 0.13)',
+        'rgba(212, 84, 26, 0.10)',
+        'rgba(226, 176, 64, 0.18)',
+        'rgba(43, 122, 114, 0.13)',
+        'rgba(212, 84, 26, 0.10)',
+        'rgba(226, 176, 64, 0.18)',
+      ];
+      const nums = ['01', '02', '03', '04', '05', '06', '07', '08'];
+      document.querySelectorAll('.section__header-content').forEach((el, i) => {
+        el.style.setProperty('--tab-color', colors[i % colors.length]);
+        el.style.setProperty('--section-num', `'${nums[i] || String(i + 1).padStart(2, '0')}'`);
+        const header = el.closest('.section__header');
+        if (header) header.style.backgroundColor = bgs[i % bgs.length];
+      });
+    }
+
+    // ============================================================
+    //  PARALLAX ENGINE
+    // ============================================================
+
+    function initParallax() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const shapes = Array.from(document.querySelectorAll('.bg-shape'));
+      const config = shapes.map(el => ({
+        el,
+        speed:    parseFloat(el.dataset.speed    || 0),
+        baseRot:  parseFloat(el.dataset.baseRot  || 0),
+        rotSpeed: parseFloat(el.dataset.rotSpeed || 0),
+      }));
+      let ticking = false;
+      function update() {
+        const sy = window.scrollY;
+        config.forEach(({ el, speed, baseRot, rotSpeed }) => {
+          el.style.transform = `translateY(${sy * speed}px) rotate(${baseRot + sy * rotSpeed}deg)`;
+        });
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    }
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSpotlight();
+      renderPlayers();
+      renderCalendar();
+      renderUpcoming();
+      renderResults();
+      renderVenues();
+      startCountdown();
+      initSectionTabs();
+      requestAnimationFrame(() => requestAnimationFrame(initAnimations));
+      initParallax();
+    });
+  </script>
+</body>
+</html>

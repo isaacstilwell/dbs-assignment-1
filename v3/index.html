@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATP Tennis Tracker — live scores, upcoming matches, player profiles, and tournament calendar.">
+  <title>Tennis Tracker — ATP 2026</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ① NAV -->
+  <nav class="nav" aria-label="Site navigation">
+    <div class="nav__inner">
+      <a class="nav__back" href="../index.html">&#8592; All Versions</a>
+      <span class="nav__title">Tennis Tracker</span>
+      <span class="nav__badge">V3</span>
+    </div>
+  </nav>
+
+  <!-- ② HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__left">
+          <div class="hero__atp">ATP Tour</div>
+          <div class="hero__year">2026</div>
+          <p class="hero__tagline">Follow every match, track the world's best players, and stay ahead of the season schedule.</p>
+        </div>
+        <div class="hero__right" id="hero-stats">
+          <div class="hero__stat">
+            <div class="hero__stat-value">6</div>
+            <div class="hero__stat-label">Players Tracked</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">11</div>
+            <div class="hero__stat-label">Tournaments This Season</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value" id="countdown-value">--</div>
+            <div class="hero__stat-label">Until Next Match</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ③ MIAMI OPEN SPOTLIGHT -->
+  <section class="spotlight" aria-labelledby="spotlight-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-header__eyebrow">In Progress</p>
+          <h2 class="section-title" id="spotlight-heading">Miami Open</h2>
+        </div>
+      </div>
+      <div id="spotlight-card"></div>
+    </div>
+  </section>
+
+  <!-- ④ PLAYER PROFILES -->
+  <section aria-labelledby="players-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-header__eyebrow">Ranked Players</p>
+          <h2 class="section-title" id="players-heading">Player Profiles</h2>
+        </div>
+      </div>
+      <div class="player-grid" id="player-grid"></div>
+    </div>
+  </section>
+
+  <!-- ⑤ TOURNAMENT CALENDAR -->
+  <section aria-labelledby="calendar-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-header__eyebrow">Season 2026</p>
+          <h2 class="section-title" id="calendar-heading">Tournament Calendar</h2>
+        </div>
+      </div>
+      <div id="calendar-table-wrapper"></div>
+    </div>
+  </section>
+
+  <!-- ⑥ UPCOMING MATCHES -->
+  <section aria-labelledby="upcoming-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-header__eyebrow">On the Horizon</p>
+          <h2 class="section-title" id="upcoming-heading">Upcoming Matches</h2>
+        </div>
+      </div>
+      <div class="schedule-list" id="upcoming-list"></div>
+    </div>
+  </section>
+
+  <!-- ⑦ RECENT RESULTS -->
+  <section aria-labelledby="results-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-header__eyebrow">Latest Action</p>
+          <h2 class="section-title" id="results-heading">Recent Results</h2>
+        </div>
+      </div>
+      <div class="results-list" id="results-list"></div>
+    </div>
+  </section>
+
+  <!-- ⑧ VENUES -->
+  <section aria-labelledby="venues-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-header__eyebrow">Where They Play</p>
+          <h2 class="section-title" id="venues-heading">Venues</h2>
+        </div>
+      </div>
+      <div class="venues-grid" id="venues-grid"></div>
+    </div>
+  </section>
+
+  <!-- ⑨ FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__text">Tennis Tracker V3 &mdash; MPCS Design Build Ship &middot; Spring 2026</span>
+      <a class="footer__back" href="../index.html">&#8592; Back to Gallery</a>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================================
+    //  DATA
+    // ============================================================
+
+    const players = [
+      {
+        id: 'p1',
+        name: 'Alejandro Vidal',
+        nationality: 'ESP',
+        flag: '🇪🇸',
+        ranking: 3,
+        rankingChange: +2,
+        wins: 41,
+        losses: 9,
+        surface: 'Clay',
+        bio: 'Three-time Roland Garros finalist with a relentless baseline game and lethal topspin forehand.',
+        photo: 'https://ui-avatars.com/api/?name=Alejandro+Vidal&size=128&background=1A4A2E&color=F5F0E8&bold=true&font-size=0.4'
+      },
+      {
+        id: 'p2',
+        name: 'Marcus Osei',
+        nationality: 'GBR',
+        flag: '🇬🇧',
+        ranking: 7,
+        rankingChange: -1,
+        wins: 34,
+        losses: 14,
+        surface: 'Grass',
+        bio: 'Wimbledon champion known for his explosive serve and decisive net-rushing game on fast surfaces.',
+        photo: 'https://ui-avatars.com/api/?name=Marcus+Osei&size=128&background=4B0082&color=F5F0E8&bold=true&font-size=0.4'
+      },
+      {
+        id: 'p3',
+        name: 'Dmitri Volkov',
+        nationality: 'RUS',
+        flag: '🇷🇺',
+        ranking: 12,
+        rankingChange: +4,
+        wins: 28,
+        losses: 18,
+        surface: 'Hard',
+        bio: 'Rising force on the hard court circuit, celebrated for his two-handed backhand precision and mental composure under pressure.',
+        photo: 'https://ui-avatars.com/api/?name=Dmitri+Volkov&size=128&background=1A5276&color=F5F0E8&bold=true&font-size=0.4'
+      },
+      {
+        id: 'p4',
+        name: 'Yuki Tanaka',
+        nationality: 'JPN',
+        flag: '🇯🇵',
+        ranking: 19,
+        rankingChange: +7,
+        wins: 22,
+        losses: 21,
+        surface: 'Hard',
+        bio: 'Speedster with elite defensive reflexes and a deceptive two-handed slice that opponents consistently misread.',
+        photo: 'https://ui-avatars.com/api/?name=Yuki+Tanaka&size=128&background=C0442A&color=F5F0E8&bold=true&font-size=0.4'
+      },
+      {
+        id: 'p5',
+        name: 'Rafael Montoya',
+        nationality: 'ARG',
+        flag: '🇦🇷',
+        ranking: 24,
+        rankingChange: 0,
+        wins: 19,
+        losses: 23,
+        surface: 'Clay',
+        bio: 'Clay-court specialist whose high-kicking serve and relentless retrieval make him a nightmare in extended rallies.',
+        photo: 'https://ui-avatars.com/api/?name=Rafael+Montoya&size=128&background=2D6B47&color=F5F0E8&bold=true&font-size=0.4'
+      },
+      {
+        id: 'p6',
+        name: 'Noah Eriksen',
+        nationality: 'DEN',
+        flag: '🇩🇰',
+        ranking: 31,
+        rankingChange: +3,
+        wins: 17,
+        losses: 25,
+        surface: 'Grass',
+        bio: 'Serve-and-volley throwback with a 230 km/h first serve and a deft touch at the net that belongs to another era.',
+        photo: 'https://ui-avatars.com/api/?name=Noah+Eriksen&size=128&background=C9A84C&color=1A1A1A&bold=true&font-size=0.4'
+      }
+    ];
+
+    const venues = [
+      {
+        id: 'v1',
+        name: 'Hard Rock Stadium',
+        city: 'Miami',
+        country: 'United States',
+        surface: 'Hard',
+        capacity: 13800,
+        surfaceColor: '#1A5276'
+      },
+      {
+        id: 'v2',
+        name: 'Court Rainier III',
+        city: 'Monte-Carlo',
+        country: 'Monaco',
+        surface: 'Clay',
+        capacity: 10000,
+        surfaceColor: '#C0442A'
+      },
+      {
+        id: 'v3',
+        name: 'Court Philippe-Chatrier',
+        city: 'Paris',
+        country: 'France',
+        surface: 'Clay',
+        capacity: 15059,
+        surfaceColor: '#C0442A'
+      },
+      {
+        id: 'v4',
+        name: 'Centre Court',
+        city: 'London',
+        country: 'United Kingdom',
+        surface: 'Grass',
+        capacity: 14979,
+        surfaceColor: '#2D6B47'
+      },
+      {
+        id: 'v5',
+        name: 'Caja Mágica — Manolo Santana',
+        city: 'Madrid',
+        country: 'Spain',
+        surface: 'Clay',
+        capacity: 12442,
+        surfaceColor: '#C0442A'
+      },
+      {
+        id: 'v6',
+        name: 'River Oaks Country Club',
+        city: 'Houston',
+        country: 'United States',
+        surface: 'Clay',
+        capacity: 7500,
+        surfaceColor: '#C0442A'
+      }
+    ];
+
+    const tournaments = [
+      {
+        id: 't1',
+        name: 'Miami Open',
+        location: 'Miami, USA',
+        startDate: '2026-03-19',
+        endDate:   '2026-03-30',
+        surface: 'Hard',
+        tier: 'Masters 1000',
+        status: 'active'
+      },
+      {
+        id: 't2',
+        name: 'Marrakech Open',
+        location: 'Marrakech, Morocco',
+        startDate: '2026-04-07',
+        endDate:   '2026-04-13',
+        surface: 'Clay',
+        tier: 'ATP 250',
+        status: 'upcoming'
+      },
+      {
+        id: 't3',
+        name: "US Men's Clay Court Championship",
+        location: 'Houston, USA',
+        startDate: '2026-04-07',
+        endDate:   '2026-04-13',
+        surface: 'Clay',
+        tier: 'ATP 250',
+        status: 'upcoming'
+      },
+      {
+        id: 't4',
+        name: 'BCR Open Romania',
+        location: 'Bucharest, Romania',
+        startDate: '2026-04-07',
+        endDate:   '2026-04-13',
+        surface: 'Clay',
+        tier: 'ATP 250',
+        status: 'upcoming'
+      },
+      {
+        id: 't5',
+        name: 'Monte-Carlo Masters',
+        location: 'Monte-Carlo, Monaco',
+        startDate: '2026-04-13',
+        endDate:   '2026-04-20',
+        surface: 'Clay',
+        tier: 'Masters 1000',
+        status: 'upcoming'
+      },
+      {
+        id: 't6',
+        name: 'Barcelona Open Banc Sabadell',
+        location: 'Barcelona, Spain',
+        startDate: '2026-04-21',
+        endDate:   '2026-04-27',
+        surface: 'Clay',
+        tier: 'ATP 500',
+        status: 'upcoming'
+      },
+      {
+        id: 't7',
+        name: 'Mutua Madrid Open',
+        location: 'Madrid, Spain',
+        startDate: '2026-04-27',
+        endDate:   '2026-05-04',
+        surface: 'Clay',
+        tier: 'Masters 1000',
+        status: 'upcoming'
+      },
+      {
+        id: 't8',
+        name: "Internazionali BNL d'Italia",
+        location: 'Rome, Italy',
+        startDate: '2026-05-11',
+        endDate:   '2026-05-18',
+        surface: 'Clay',
+        tier: 'Masters 1000',
+        status: 'upcoming'
+      },
+      {
+        id: 't9',
+        name: 'Roland Garros',
+        location: 'Paris, France',
+        startDate: '2026-05-25',
+        endDate:   '2026-06-08',
+        surface: 'Clay',
+        tier: 'Grand Slam',
+        status: 'upcoming'
+      },
+      {
+        id: 't10',
+        name: 'cinch Championships',
+        location: 'London, UK',
+        startDate: '2026-06-09',
+        endDate:   '2026-06-15',
+        surface: 'Grass',
+        tier: 'ATP 500',
+        status: 'upcoming'
+      },
+      {
+        id: 't11',
+        name: 'Wimbledon',
+        location: 'London, UK',
+        startDate: '2026-06-30',
+        endDate:   '2026-07-13',
+        surface: 'Grass',
+        tier: 'Grand Slam',
+        status: 'upcoming'
+      }
+    ];
+
+    const spotlightMatches = [
+      {
+        id: 's1',
+        player1Id: 'p1',
+        player2Id: 'p4',
+        winnerId: 'p1',
+        score: '7–5, 6–3',
+        round: 'Quarterfinal',
+        date: '2026-03-25',
+        status: 'completed'
+      },
+      {
+        id: 's2',
+        player1Id: 'p2',
+        player2Id: 'p5',
+        winnerId: 'p2',
+        score: '6–4, 6–7(3), 6–2',
+        round: 'Quarterfinal',
+        date: '2026-03-25',
+        status: 'completed'
+      },
+      {
+        id: 's3',
+        player1Id: 'p3',
+        player2Id: 'p6',
+        winnerId: null,
+        score: 'Mar 27 · 14:00',
+        round: 'Quarterfinal',
+        date: '2026-03-27',
+        status: 'upcoming'
+      },
+      {
+        id: 's4',
+        player1Id: 'p1',
+        player2Id: 'p2',
+        winnerId: null,
+        score: 'Mar 28 · 17:00',
+        round: 'Semifinal',
+        date: '2026-03-28',
+        status: 'upcoming'
+      }
+    ];
+
+    const upcomingMatches = [
+      {
+        id: 'u1',
+        player1Id: 'p3',
+        player2Id: 'p6',
+        tournamentId: 't1',
+        date: '2026-03-27',
+        time: '14:00',
+        round: 'QF'
+      },
+      {
+        id: 'u2',
+        player1Id: 'p1',
+        player2Id: 'p2',
+        tournamentId: 't1',
+        date: '2026-03-28',
+        time: '17:00',
+        round: 'SF'
+      },
+      {
+        id: 'u3',
+        player1Id: 'p3',
+        player2Id: 'p6',
+        tournamentId: 't1',
+        date: '2026-03-29',
+        time: '17:00',
+        round: 'SF'
+      },
+      {
+        id: 'u4',
+        player1Id: 'p5',
+        player2Id: 'p6',
+        tournamentId: 't3',
+        date: '2026-04-07',
+        time: '12:00',
+        round: 'R1'
+      },
+      {
+        id: 'u5',
+        player1Id: 'p1',
+        player2Id: 'p3',
+        tournamentId: 't5',
+        date: '2026-04-14',
+        time: '14:00',
+        round: 'R32'
+      }
+    ];
+
+    const recentResults = [
+      {
+        id: 'r1',
+        player1Id: 'p2',
+        player2Id: 'p5',
+        winnerId: 'p2',
+        score: '6–4, 6–7(3), 6–2',
+        date: '2026-03-25',
+        tournamentId: 't1',
+        round: 'Quarterfinal',
+        duration: '2h 18m'
+      },
+      {
+        id: 'r2',
+        player1Id: 'p1',
+        player2Id: 'p4',
+        winnerId: 'p1',
+        score: '7–5, 6–3',
+        date: '2026-03-25',
+        tournamentId: 't1',
+        round: 'Quarterfinal',
+        duration: '1h 44m'
+      },
+      {
+        id: 'r3',
+        player1Id: 'p3',
+        player2Id: 'p4',
+        winnerId: 'p3',
+        score: '6–1, 6–2',
+        date: '2026-03-23',
+        tournamentId: 't1',
+        round: 'Round of 16',
+        duration: '1h 02m'
+      },
+      {
+        id: 'r4',
+        player1Id: 'p6',
+        player2Id: 'p5',
+        winnerId: 'p6',
+        score: '7–6(5), 6–4',
+        date: '2026-03-22',
+        tournamentId: 't1',
+        round: 'Round of 16',
+        duration: '1h 58m'
+      },
+      {
+        id: 'r5',
+        player1Id: 'p5',
+        player2Id: 'p1',
+        winnerId: 'p1',
+        score: '4–6, 6–3, 6–4, 6–2',
+        date: '2026-03-21',
+        tournamentId: 't1',
+        round: 'Round of 16',
+        duration: '2h 31m'
+      }
+    ];
+
+    // ============================================================
+    //  HELPERS
+    // ============================================================
+
+    const getPlayer     = id => players.find(p => p.id === id);
+    const getTournament = id => tournaments.find(t => t.id === id);
+    const winRate       = (w, l) => Math.round(w / (w + l) * 100);
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+
+    function formatDateShort(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatDateRange(start, end) {
+      const s = new Date(start + 'T12:00:00');
+      const e = new Date(end   + 'T12:00:00');
+      const sm = s.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const em = e.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `${sm} – ${em}`;
+    }
+
+    function surfaceBadge(surface) {
+      const cls = surface.toLowerCase();
+      return `<span class="badge-surface badge-surface--${cls}">${surface}</span>`;
+    }
+
+    function tierBadge(tier) {
+      const map = {
+        'Grand Slam':   'grand-slam',
+        'Masters 1000': 'masters',
+        'ATP 500':      'atp500',
+        'ATP 250':      'atp250'
+      };
+      const cls = map[tier] || 'atp250';
+      return `<span class="badge-tier badge-tier--${cls}">${tier}</span>`;
+    }
+
+    function rankChangeStr(change) {
+      if (change > 0) return `+${change}`;
+      if (change < 0) return `${change}`;
+      return '—';
+    }
+
+    function miniAvatar(player) {
+      return `<div class="mini-avatar"><img src="${player.photo}" alt="${player.name}" loading="lazy"></div>`;
+    }
+
+    // ============================================================
+    //  RENDER: SPOTLIGHT
+    // ============================================================
+
+    function renderSpotlight() {
+      const completedMatches = spotlightMatches.filter(m => m.status === 'completed');
+      const upcomingSpotlight = spotlightMatches.filter(m => m.status === 'upcoming');
+
+      const matchHTML = [...completedMatches, ...upcomingSpotlight].map(m => {
+        const p1 = getPlayer(m.player1Id);
+        const p2 = getPlayer(m.player2Id);
+        const p1Winner = m.winnerId === p1.id;
+        const isUpcoming = m.status === 'upcoming';
+        return `
+          <div class="spotlight-match ${isUpcoming ? 'spotlight-match--upcoming' : ''}">
+            <span class="spotlight-match__round">${m.round}</span>
+            <div class="spotlight-match__player">
+              ${miniAvatar(p1)}
+              <span class="spotlight-match__name ${!isUpcoming && p1Winner ? 'spotlight-match__name--winner' : (!isUpcoming ? 'spotlight-match__name--loser' : '')}">${p1.name}</span>
+            </div>
+            <span class="spotlight-match__score ${isUpcoming ? 'spotlight-match__score--upcoming' : ''}">${m.score}</span>
+            <div class="spotlight-match__player spotlight-match__player--right">
+              <span class="spotlight-match__name ${!isUpcoming && !p1Winner ? 'spotlight-match__name--winner' : (!isUpcoming ? 'spotlight-match__name--loser' : '')}">${p2.name}</span>
+              ${miniAvatar(p2)}
+            </div>
+          </div>`;
+      }).join('');
+
+      document.getElementById('spotlight-card').innerHTML = `
+        <div class="spotlight__meta">
+          <span class="badge-live">In Progress</span>
+          ${surfaceBadge('Hard')}
+          ${tierBadge('Masters 1000')}
+          <span class="spotlight__venue">Hard Rock Stadium &middot; Miami, FL</span>
+        </div>
+        <p class="spotlight__subtitle">Quarterfinals — Week 2</p>
+        <div class="spotlight-matches">${matchHTML}</div>`;
+    }
+
+    // ============================================================
+    //  RENDER: PLAYERS
+    // ============================================================
+
+    function renderPlayers() {
+      const html = players.map(p => {
+        const pct = winRate(p.wins, p.losses);
+        const change = rankChangeStr(p.rankingChange);
+        return `
+          <article class="player-card">
+            <div class="player-card__rank-number">${p.ranking}</div>
+            <h3 class="player-card__name">${p.name}</h3>
+            <div class="player-card__meta">
+              <span class="player-card__flag">${p.flag}</span>
+              <span>${p.nationality}</span>
+              <span>&middot;</span>
+              ${surfaceBadge(p.surface)}
+              <span>&middot;</span>
+              <span>Rank change: ${change}</span>
+            </div>
+            <div class="player-card__stats">
+              <div class="player-card__stat">
+                <div class="player-card__stat-value">${p.wins}W / ${p.losses}L</div>
+                <div class="player-card__stat-label">Season Record</div>
+              </div>
+              <div class="player-card__stat">
+                <div class="player-card__stat-value">${pct}%</div>
+                <div class="player-card__stat-label">Win Rate</div>
+              </div>
+            </div>
+            <p class="player-card__bio">${p.bio}</p>
+          </article>`;
+      }).join('');
+      document.getElementById('player-grid').innerHTML = html;
+    }
+
+    // ============================================================
+    //  RENDER: TOURNAMENT CALENDAR
+    // ============================================================
+
+    function renderCalendar() {
+      const rows = tournaments.map(t => {
+        const isActive = t.status === 'active';
+        const statusCell = isActive
+          ? `<span class="badge-live">In Progress</span>`
+          : `<span class="status-upcoming">Upcoming</span>`;
+        return `
+          <tr class="${isActive ? 'row--active' : ''}">
+            <td>${t.name}</td>
+            <td>${t.location}</td>
+            <td>${formatDateRange(t.startDate, t.endDate)}</td>
+            <td>${surfaceBadge(t.surface)}</td>
+            <td>${tierBadge(t.tier)}</td>
+            <td>${statusCell}</td>
+          </tr>`;
+      }).join('');
+
+      document.getElementById('calendar-table-wrapper').innerHTML = `
+        <table class="calendar-table">
+          <thead>
+            <tr>
+              <th>Tournament</th>
+              <th>Location</th>
+              <th>Dates</th>
+              <th>Surface</th>
+              <th>Tier</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    // ============================================================
+    //  RENDER: UPCOMING MATCHES
+    // ============================================================
+
+    function renderUpcoming() {
+      const html = upcomingMatches.map(m => {
+        const p1 = getPlayer(m.player1Id);
+        const p2 = getPlayer(m.player2Id);
+        const t  = getTournament(m.tournamentId);
+        return `
+          <div class="schedule-row">
+            <div class="schedule-row__date">
+              <div class="schedule-row__date-day">${formatDateShort(m.date)}</div>
+              <div class="schedule-row__date-time">${m.time}</div>
+            </div>
+            <div class="schedule-row__matchup">
+              ${p1.flag} ${p1.name}
+              <span class="schedule-row__vs">vs</span>
+              ${p2.flag} ${p2.name}
+            </div>
+            <div class="schedule-row__meta">
+              ${surfaceBadge(t.surface)}
+              <span class="schedule-row__round">${m.round}</span>
+              <span class="schedule-row__tournament">${t.name}</span>
+            </div>
+          </div>`;
+      }).join('');
+      document.getElementById('upcoming-list').innerHTML = html;
+    }
+
+    // ============================================================
+    //  RENDER: RECENT RESULTS
+    // ============================================================
+
+    function renderResults() {
+      const html = recentResults.map(r => {
+        const p1 = getPlayer(r.player1Id);
+        const p2 = getPlayer(r.player2Id);
+        const t  = getTournament(r.tournamentId);
+        const p1Win = r.winnerId === p1.id;
+        return `
+          <div class="result-row">
+            <span class="result-row__date">${formatDate(r.date)}</span>
+            <span class="result-row__player ${p1Win ? 'result-row__player--winner' : 'result-row__player--loser'}">
+              ${p1.flag} ${p1.name}
+            </span>
+            <span class="result-row__score">${r.score}</span>
+            <span class="result-row__player ${!p1Win ? 'result-row__player--winner' : 'result-row__player--loser'}">
+              ${p2.flag} ${p2.name}
+            </span>
+            <div class="result-row__meta">
+              <strong>${r.round}</strong>
+              ${t.name} &middot; ${r.duration}
+            </div>
+          </div>`;
+      }).join('');
+      document.getElementById('results-list').innerHTML = html;
+    }
+
+    // ============================================================
+    //  RENDER: VENUES
+    // ============================================================
+
+    function renderVenues() {
+      const html = venues.map(v => `
+        <div class="venue-card">
+          <h3 class="venue-card__name">${v.name}</h3>
+          <p class="venue-card__location">${v.city}, ${v.country}</p>
+          <div class="venue-card__stats">
+            ${surfaceBadge(v.surface)}
+            <span class="venue-card__capacity"><strong>${v.capacity.toLocaleString()}</strong> capacity</span>
+          </div>
+        </div>`).join('');
+      document.getElementById('venues-grid').innerHTML = html;
+    }
+
+    // ============================================================
+    //  COUNTDOWN
+    // ============================================================
+
+    function startCountdown() {
+      const el = document.getElementById('countdown-value');
+      const now = new Date();
+
+      const next = upcomingMatches
+        .map(m => new Date(`${m.date}T${m.time}:00`))
+        .filter(d => d > now)
+        .sort((a, b) => a - b)[0];
+
+      if (!next) {
+        el.textContent = 'TBD';
+        return;
+      }
+
+      function update() {
+        const diff = next - new Date();
+        if (diff <= 0) { el.textContent = 'Now'; return; }
+        const days  = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const mins  = Math.floor((diff % 3600000)  / 60000);
+        if (days > 0)       el.textContent = `${days}d ${hours}h`;
+        else if (hours > 0) el.textContent = `${hours}h ${mins}m`;
+        else                el.textContent = `${mins}m`;
+      }
+
+      update();
+      setInterval(update, 60000);
+    }
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSpotlight();
+      renderPlayers();
+      renderCalendar();
+      renderUpcoming();
+      renderResults();
+      renderVenues();
+      startCountdown();
+    });
+  </script>
+</body>
+</html>

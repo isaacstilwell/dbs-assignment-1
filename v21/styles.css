@@ -1,0 +1,1350 @@
+/* ============================================================
+   Tennis Tracker V21 — Memphis × MCM Animated + Section Color Tabs
+   V20 base + cycling color tab system on section headers
+   ============================================================ */
+
+/* ── Custom Properties ── */
+:root {
+  --bg:      #F4EFE4;
+  --text:    #111111;
+  --accent:  #D4541A;
+  --mustard: #E2B040;
+  --teal:    #2B7A72;
+  --white:   #FDFAF5;
+  --shadow:  #111111;
+
+  --font: 'Futura', 'Century Gothic', 'Trebuchet MS', Arial, sans-serif;
+
+  --stripe: repeating-linear-gradient(
+    45deg,
+    var(--accent),  var(--accent)  3px,
+    var(--mustard), var(--mustard) 6px
+  );
+
+  /* V20 easing tokens */
+  --ease-mcm:    cubic-bezier(0.16, 1, 0.3, 1);    /* weighted, confident */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot, bouncy */
+  --ease-stamp:  cubic-bezier(0.22, 1, 0.36, 1);    /* fast in, settle */
+}
+
+/* ── Reset / Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* ── Layout Utilities ── */
+.inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.top-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;          /* 56 - 6px stripe */
+  padding: 0 2rem;
+}
+
+/* Memphis diagonal stripe replaces plain bottom border */
+.top-nav::after {
+  content: '';
+  display: block;
+  height: 6px;
+  background: var(--stripe);
+  flex-shrink: 0;
+}
+
+.top-nav__back {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.top-nav__back:hover { color: var(--accent); text-decoration: none; }
+
+.top-nav__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.top-nav__version {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+  border-radius: 0;
+}
+
+/* ============================================================
+   EYEBROW / SECTION HEADERS
+   ============================================================ */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+
+.eyebrow-dot {
+  color: var(--accent);
+  font-size: 0.55rem;
+  line-height: 1;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.section__header {
+  margin-bottom: 2.5rem;
+}
+
+.section__header-rule {
+  height: 3px;
+  background: var(--text);
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section {
+  padding: 5rem 0;
+}
+
+.section--alt {
+  background: var(--white);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background: var(--bg);
+  border-bottom: 3px solid var(--text);
+  padding: 5rem 0 4rem;
+}
+
+.hero__grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.hero__eyebrow::before {
+  content: '●';
+  color: var(--accent);
+  font-size: 0.55rem;
+}
+
+.hero__title {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 0.92;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.hero__divider {
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.hero__subtitle {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 38ch;
+  opacity: 0.8;
+}
+
+/* Hero stat blocks */
+.hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-block {
+  background: var(--white);
+  border: 2px solid var(--text);
+  box-shadow: 4px 4px 0 var(--text);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  cursor: default;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.stat-block:nth-child(1) { --rest-rot: -1deg; transform: rotate(-1deg); }
+.stat-block:nth-child(2) { --rest-rot: 0.5deg; transform: rotate(0.5deg); }
+.stat-block:nth-child(3) { --rest-rot: -0.5deg; transform: rotate(-0.5deg); }
+
+.stat-block:hover {
+  box-shadow: 6px 6px 0 var(--text);
+  transform: rotate(0deg) !important;
+}
+
+.stat-block__value {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+
+.stat-block__value--mustard { color: var(--mustard); }
+
+.stat-block__label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ============================================================
+   SPOTLIGHT SECTION
+   ============================================================ */
+.spotlight-header {
+  background: var(--accent);
+  background-image: radial-gradient(circle, rgba(253,250,245,0.15) 1px, transparent 1px);
+  background-size: 16px 16px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), 0 100%);
+  padding: 3.5rem 0 5rem;
+  color: var(--white);
+}
+
+.spotlight-header__inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.spotlight-header__eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(253,250,245,0.75);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.spotlight-header__eyebrow::before {
+  content: '●';
+  color: var(--mustard);
+  font-size: 0.55rem;
+}
+
+.spotlight-header__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+}
+
+.spotlight-header__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.spotlight-body {
+  background: var(--bg);
+  padding: 3rem 0 4rem;
+  margin-top: -2px;
+}
+
+.spotlight-subtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+}
+
+/* Spotlight match rows */
+.spotlight-matches {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.spotlight-row {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 2px solid var(--text);
+  transition: background 0.15s ease;
+}
+
+.spotlight-row:last-child {
+  border-bottom: 2px solid var(--text);
+}
+
+.spotlight-row:hover {
+  background: rgba(212,84,26,0.04);
+}
+
+.spotlight-row__round-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.25rem 0.35rem;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+}
+
+.spotlight-row__round-badge--completed {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.spotlight-row__round-badge--upcoming {
+  background: var(--mustard);
+  color: var(--text);
+}
+
+.spotlight-row__players {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.spotlight-row__player-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.spotlight-row__player-name--winner {
+  color: var(--teal);
+}
+
+.spotlight-row__player-name--loser {
+  opacity: 0.5;
+}
+
+.spotlight-row__vs {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.4;
+}
+
+.spotlight-row__score {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.spotlight-row__score--upcoming {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+/* Mini avatar */
+.mini-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--text);
+  flex-shrink: 0;
+}
+
+.mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Live badge in spotlight */
+.badge-live {
+  display: inline-block;
+  background: var(--text);
+  color: var(--white);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid var(--white);
+  box-shadow: 2px 2px 0 rgba(253,250,245,0.4);
+}
+
+/* ============================================================
+   PLAYER CARDS
+   ============================================================ */
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+/* Cycling top accent colors for cards */
+.player-card:nth-child(3n+1) { --card-accent: var(--accent); }
+.player-card:nth-child(3n+2) { --card-accent: var(--mustard); }
+.player-card:nth-child(3n+3) { --card-accent: var(--teal); }
+
+.player-card {
+  background: var(--white);
+  border: 2px solid var(--text);
+  box-shadow: 4px 4px 0 var(--text);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 4px top stripe as top accent instead of colored top border */
+.player-card::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: var(--card-accent);
+  width: 100%;
+}
+
+.player-card:hover {
+  transform: translateY(-3px) translateX(-3px);
+  box-shadow: 7px 7px 0 var(--text);
+}
+
+.player-card__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0.75rem;
+}
+
+.player-card__rank-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+  flex-shrink: 0;
+}
+
+.player-card__photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--text);
+  flex-shrink: 0;
+}
+
+.player-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-card__identity {
+  flex: 1;
+  min-width: 0;
+}
+
+.player-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+
+.player-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.player-card__flag { font-size: 1rem; }
+
+.player-card__nationality {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.player-card__body {
+  padding: 0.75rem 1.25rem 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem 0.25rem;
+}
+
+.player-card__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  border-top: 1px solid rgba(17,17,17,0.12);
+}
+
+.player-card__stat-value {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.player-card__stat-value--mustard { color: var(--mustard); }
+
+.player-card__stat-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-top: 0.2rem;
+}
+
+.player-card__bio {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text);
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(17,17,17,0.12);
+}
+
+.player-card__surface-badge { flex-shrink: 0; }
+
+/* ============================================================
+   TOURNAMENT CALENDAR
+   ============================================================ */
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--text);
+}
+
+.calendar-table thead tr {
+  background: var(--text);
+  color: var(--white);
+}
+
+.calendar-table thead th {
+  padding: 0.75rem 1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.calendar-table tbody tr {
+  border-top: 1px solid rgba(17,17,17,0.15);
+  transition: background 0.12s ease;
+}
+
+.calendar-table tbody tr:nth-child(even) {
+  background: var(--white);
+}
+
+.calendar-table tbody tr:nth-child(odd) {
+  background: var(--bg);
+}
+
+.calendar-table tbody tr.row--active {
+  border-left: 4px solid var(--accent);
+  background: rgba(212,84,26,0.06) !important;
+}
+
+.calendar-table tbody tr:hover {
+  background: rgba(212,84,26,0.04) !important;
+}
+
+.calendar-table td {
+  padding: 0.9rem 1rem;
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+.td--name {
+  font-weight: 700;
+  color: var(--text);
+  min-width: 200px;
+}
+
+.td--location,
+.td--dates {
+  color: var(--text);
+  opacity: 0.7;
+  font-size: 0.82rem;
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge-surface,
+.badge-tier {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+  border-radius: 0;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* Surface colors */
+.badge-surface--clay  { background: var(--accent); }
+.badge-surface--grass { background: var(--teal); }
+.badge-surface--hard  { background: #1A5276; }
+
+/* Tier colors */
+.badge-tier--grand-slam {
+  background: var(--mustard);
+  color: var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+}
+.badge-tier--masters {
+  background: var(--text);
+  color: var(--white);
+}
+.badge-tier--atp500 {
+  background: var(--teal);
+  color: var(--white);
+}
+.badge-tier--atp250 {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* IN PROGRESS badge in table */
+.badge-live {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+  border-radius: 0;
+}
+
+/* Rank change badges */
+.rank-change {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.3rem;
+  border: 1px solid var(--text);
+  display: inline-block;
+}
+
+.rank-change--up   { background: var(--teal);   color: var(--white); }
+.rank-change--down { background: var(--accent);  color: var(--white); }
+.rank-change--same { background: var(--bg);      color: var(--text);  opacity: 0.6; }
+
+/* ============================================================
+   UPCOMING MATCHES (Schedule)
+   ============================================================ */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.1rem 0;
+  border-top: 2px solid var(--text);
+  transition: background 0.12s ease;
+}
+
+.schedule-row:last-child {
+  border-bottom: 2px solid var(--text);
+}
+
+.schedule-row:hover {
+  background: rgba(212,84,26,0.04);
+}
+
+.schedule-row__date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.schedule-row__date strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.schedule-row__date span {
+  font-size: 0.7rem;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+}
+
+.schedule-row__matchup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.schedule-row__player {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.schedule-row__vs {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.4;
+}
+
+.schedule-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.schedule-row__round {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.schedule-row__tournament {
+  font-size: 0.75rem;
+  color: var(--text);
+  opacity: 0.6;
+}
+
+/* ============================================================
+   RECENT RESULTS
+   ============================================================ */
+.results-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: 7rem auto 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 2px solid var(--text);
+  transition: background 0.12s ease;
+}
+
+.result-row:last-child {
+  border-bottom: 2px solid var(--text);
+}
+
+.result-row:hover {
+  background: rgba(212,84,26,0.04);
+}
+
+.result-row__date {
+  font-size: 0.72rem;
+  color: var(--teal);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.result-row__player {
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.result-row__player--winner { color: var(--teal); }
+.result-row__player--loser  { color: var(--text); opacity: 0.45; }
+
+.result-row__score {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.result-row__meta {
+  font-size: 0.72rem;
+  color: var(--text);
+  opacity: 0.6;
+  text-align: right;
+}
+
+.result-row__meta strong {
+  font-weight: 700;
+  color: var(--teal);
+  display: block;
+  opacity: 1;
+}
+
+/* ============================================================
+   VENUES
+   ============================================================ */
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.venue-card {
+  background: var(--white);
+  border: 2px solid var(--text);
+  box-shadow: 4px 4px 0 var(--text);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-3px) translateX(-3px);
+  box-shadow: 7px 7px 0 var(--text);
+}
+
+.venue-card__surface-bar {
+  display: block;
+  height: 4px;
+  width: 100%;
+}
+
+.venue-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  padding: 1rem 1.25rem 0.25rem;
+  line-height: 1.25;
+}
+
+.venue-card__location {
+  font-size: 0.78rem;
+  color: var(--teal);
+  font-weight: 600;
+  padding: 0 1.25rem 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.venue-card__stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem 1.25rem;
+  border-top: 1px solid rgba(17,17,17,0.12);
+  flex-wrap: wrap;
+}
+
+.venue-card__capacity {
+  font-size: 0.75rem;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.venue-card__capacity strong {
+  font-weight: 700;
+  color: var(--text);
+  opacity: 1;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--bg);
+  border-top: 3px solid var(--text);
+  position: relative;
+}
+
+/* Memphis stripe mirrors the nav */
+.site-footer::before {
+  content: '';
+  display: block;
+  height: 6px;
+  background: var(--stripe);
+}
+
+.site-footer__inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-footer__text {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.site-footer__back {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.site-footer__back:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ============================================================
+   SECTION HEADER CONTENT VARIANTS
+   ============================================================ */
+.section__header-content {
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--text);
+}
+
+.section__header-content--players {
+  /* no extra tweak needed */
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hero__title {
+    font-size: clamp(2.8rem, 10vw, 4.5rem);
+  }
+
+  .hero__stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .stat-block {
+    flex: 1 1 140px;
+  }
+
+  .stat-block:nth-child(1),
+  .stat-block:nth-child(2),
+  .stat-block:nth-child(3) {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .result-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .schedule-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .schedule-row__meta {
+    justify-content: flex-start;
+  }
+
+  .spotlight-row {
+    grid-template-columns: 3rem 1fr;
+    gap: 0.75rem;
+  }
+
+  .spotlight-row__score {
+    grid-column: 2;
+  }
+
+  .calendar-table {
+    font-size: 0.78rem;
+  }
+
+  .calendar-table thead th,
+  .calendar-table td {
+    padding: 0.6rem 0.6rem;
+  }
+
+  .td--location { display: none; }
+
+  .player-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding: 0 1rem;
+  }
+
+  .hero__grid {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .hero {
+    padding: 3rem 0 2.5rem;
+  }
+}
+
+
+/* ============================================================
+   V20 ANIMATION SYSTEM
+   MCM carries structure-level motion; Memphis punctuates element-level.
+   Hybrid rule: MCM easing for arriving, Memphis spring for landing.
+   ============================================================ */
+
+/* ── Keyframes ── */
+
+@keyframes mcm-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mcm-rule-extend {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes mem-stamp {
+  0%   { opacity: 0; transform: scale(0.7) rotate(-6deg); }
+  70%  { opacity: 1; transform: scale(1.12) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes mem-badge-pop {
+  0%   { opacity: 0; transform: scale(0) rotate(-8deg); }
+  65%  { transform: scale(1.2) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes mcm-rotate-settle {
+  /* stat blocks enter more rotated, settle to their resting rotation */
+  from { opacity: 0; transform: translateY(20px) rotate(-4deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(var(--rest-rot, -1deg)); }
+}
+
+@keyframes nav-stripe-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes shadow-pop {
+  from { box-shadow: 0 0 0 var(--text); }
+  to   { box-shadow: 4px 4px 0 var(--text); }
+}
+
+/* ── Page-load animations (fire once on load) ── */
+
+/* Nav stripe wipes in left→right */
+.top-nav::after {
+  animation: nav-stripe-wipe 0.4s var(--ease-stamp) 0.1s both;
+}
+
+/* Hero eyebrow rises before title */
+.hero__eyebrow {
+  animation: mcm-rise 0.5s var(--ease-mcm) 0s both;
+}
+
+/* Hero title rises with MCM easing */
+.hero__title {
+  animation: mcm-rise 0.7s var(--ease-mcm) 0.15s both;
+}
+
+/* Hero orange divider extends left→right after title arrives */
+.hero__divider {
+  transform-origin: left center;
+  animation: mcm-rule-extend 0.5s var(--ease-stamp) 0.55s both;
+}
+
+/* Hero subtitle rises after divider */
+.hero__subtitle {
+  animation: mcm-rise 0.5s var(--ease-mcm) 0.65s both;
+}
+
+/* Hero stat blocks: rise AND settle to their resting rotation */
+.stat-block:nth-child(1) {
+  --rest-rot: -1deg;
+  animation: mcm-rotate-settle 0.6s var(--ease-mcm) 0.5s both;
+}
+.stat-block:nth-child(2) {
+  --rest-rot: 0.5deg;
+  animation: mcm-rotate-settle 0.6s var(--ease-mcm) 0.6s both;
+}
+.stat-block:nth-child(3) {
+  --rest-rot: -0.5deg;
+  animation: mcm-rotate-settle 0.6s var(--ease-mcm) 0.7s both;
+}
+
+/* ── Scroll-reveal base states (applied by JS, before .is-visible) ── */
+
+.reveal-rise {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: none;
+}
+
+.reveal-rule {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: none;
+}
+
+/* The signature shadow-stamp: card starts with no shadow */
+.reveal-stamp {
+  opacity: 0;
+  transform: scale(0.85) rotate(-3deg);
+  transition: none;
+  box-shadow: 0 0 0 transparent;
+}
+
+.reveal-badge {
+  opacity: 0;
+  transform: scale(0);
+  transition: none;
+}
+
+/* ── Scroll-reveal active states (.is-visible added by IntersectionObserver) ── */
+
+.reveal-rise.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s var(--ease-mcm),
+    transform 0.6s var(--ease-mcm);
+  transition-delay: var(--stagger, 0ms);
+}
+
+.reveal-rule.is-visible {
+  transform: scaleX(1);
+  transition: transform 0.5s var(--ease-stamp);
+  transition-delay: var(--stagger, 0ms);
+}
+
+/* Memphis stamp: card arrives with spring, shadow stamps in 60ms later */
+.reveal-stamp.is-visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  box-shadow: 4px 4px 0 var(--text);
+  transition:
+    opacity 0.5s var(--ease-spring),
+    transform 0.5s var(--ease-spring),
+    box-shadow 0.3s var(--ease-stamp) calc(var(--stagger, 0ms) + 60ms);
+  transition-delay: var(--stagger, 0ms);
+}
+
+.reveal-badge.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.4s var(--ease-spring),
+    transform 0.4s var(--ease-spring);
+  transition-delay: var(--stagger, 0ms);
+}
+
+/* ── Reduced motion: disable all animations ── */
+@media (prefers-reduced-motion: reduce) {
+  .top-nav::after,
+  .hero__eyebrow,
+  .hero__title,
+  .hero__divider,
+  .hero__subtitle,
+  .stat-block:nth-child(1),
+  .stat-block:nth-child(2),
+  .stat-block:nth-child(3) {
+    animation: none;
+  }
+
+  .reveal-rise,
+  .reveal-rule,
+  .reveal-stamp,
+  .reveal-badge {
+    opacity: 1;
+    transform: none;
+    box-shadow: revert;
+    transition: none;
+  }
+}
+
+
+/* ============================================================
+   V21 SECTION COLOR TAB SYSTEM
+   Cycling left-border color tab + ghost section number
+   per section header. Colors: accent → mustard → teal (repeat).
+   ============================================================ */
+
+/* Left color tab + positioning context for ghost number */
+.section__header-content {
+  border-left: 8px solid var(--tab-color, var(--accent));
+  padding-left: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ghost section number — large, low-opacity, right-anchored */
+.section__header-content::before {
+  content: var(--section-num, '01');
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9rem;
+  font-weight: 900;
+  font-family: 'Futura', 'Century Gothic', 'Trebuchet MS', Arial, sans-serif;
+  color: var(--tab-color, var(--accent));
+  opacity: 0.07;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* Eyebrow dot inherits the tab color — ties dot, tab, and ghost together */
+.section__header-content .eyebrow-dot {
+  color: var(--tab-color, var(--accent));
+}

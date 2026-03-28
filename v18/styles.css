@@ -1,0 +1,753 @@
+/* ============================================================
+   THE TENNIS RECORD — V18 — Data Newspaper
+   Palette: #F8F6F0 newsprint, #111111 black, #333333 dark gray,
+            #666666 medium gray, #CCCCCC light gray
+   ============================================================ */
+
+/* ── RESET & BASE ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #F8F6F0;
+  color: #111111;
+  font-family: 'Georgia', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #111111;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #333333;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── LAYOUT ── */
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── MASTHEAD / NAV ── */
+.masthead {
+  background: #111111;
+  color: #F8F6F0;
+  padding: 0;
+}
+
+.masthead__top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(248, 246, 240, 0.65);
+}
+
+.masthead__back {
+  color: rgba(248, 246, 240, 0.65);
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.masthead__back:hover {
+  color: #F8F6F0;
+}
+
+.masthead__date {
+  letter-spacing: 0.08em;
+}
+
+.masthead__vol {
+  letter-spacing: 0.08em;
+}
+
+.masthead__center {
+  text-align: center;
+  padding: 1.2rem 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.masthead__title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  color: #F8F6F0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.masthead__tagline {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(248, 246, 240, 0.65);
+  margin-bottom: 0;
+}
+
+.masthead__rule {
+  border: none;
+  border-top: 3px solid #111111;
+  margin: 0;
+  /* This sits below the black bar — it's on #F8F6F0 background */
+  border-top-color: #F8F6F0;
+  height: 3px;
+  background: #F8F6F0;
+}
+
+/* The thick rule below the masthead black bar */
+.masthead-underrule {
+  border: none;
+  border-top: 3px solid #111111;
+  margin: 0;
+}
+
+/* ── SECTION DOUBLE-RULE ── */
+.section-header {
+  margin-bottom: 1.8rem;
+}
+
+.section-title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.section-double-rule {
+  border: none;
+  border-top: 2px solid #111111;
+  margin-bottom: 2px;
+}
+
+.section-double-rule + .section-double-rule-thin {
+  border: none;
+  border-top: 1px solid #111111;
+  margin-bottom: 0.4rem;
+}
+
+.section-byline {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #666666;
+  margin-top: 0.35rem;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 2.5rem 0 2rem;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.hero__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.hero__headline {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.hero__lede {
+  font-family: 'Georgia', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
+  color: #111111;
+}
+
+.hero__lede::first-letter {
+  font-size: 3.5rem;
+  font-weight: 700;
+  float: left;
+  line-height: 0.8;
+  margin: 0.1rem 0.4rem 0 0;
+  font-family: 'Georgia', serif;
+  color: #111111;
+}
+
+.hero__right {
+  border-left: 1px solid #CCCCCC;
+  padding-left: 2rem;
+}
+
+.hero__news-brief-label {
+  font-family: 'Arial Narrow', 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #111111;
+  margin-bottom: 0.8rem;
+  border-bottom: 2px solid #111111;
+  padding-bottom: 0.3rem;
+}
+
+.stat-box {
+  border: 2px solid #111111;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.stat-box__value {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #111111;
+}
+
+.stat-box__label {
+  display: block;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666666;
+  margin-top: 0.2rem;
+}
+
+/* ── GENERAL SECTION WRAPPER ── */
+.section {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.section--alt {
+  background: #F8F6F0;
+}
+
+/* ── SPOTLIGHT ── */
+.spotlight-meta-line {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666666;
+  margin-bottom: 1.2rem;
+}
+
+.spotlight-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Georgia', serif;
+}
+
+.spotlight-table th {
+  font-family: 'Arial Narrow', 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #333333;
+  border-bottom: 1px solid #111111;
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+}
+
+.spotlight-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #CCCCCC;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.spotlight-table tr:last-child td {
+  border-bottom: none;
+}
+
+.spotlight-round {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666666;
+  white-space: nowrap;
+}
+
+.spotlight-players {
+  font-family: 'Georgia', serif;
+}
+
+.spotlight-player--winner {
+  font-weight: 700;
+}
+
+.spotlight-player--loser {
+  color: #666666;
+}
+
+.spotlight-vs {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #666666;
+  margin: 0 0.4rem;
+  text-transform: lowercase;
+  font-style: italic;
+}
+
+.spotlight-score {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.spotlight-score--upcoming {
+  color: #666666;
+  font-style: italic;
+}
+
+.spotlight-status {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.status-completed {
+  color: #333333;
+}
+
+.status-upcoming {
+  color: #666666;
+  font-style: italic;
+}
+
+/* ── PLAYERS (multi-column newspaper flow) ── */
+.player-columns {
+  column-count: 3;
+  column-gap: 2rem;
+  column-rule: 1px solid #CCCCCC;
+}
+
+.player-blurb {
+  break-inside: avoid;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.player-blurb:last-child {
+  border-bottom: none;
+}
+
+.player-blurb__name {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+}
+
+.player-blurb__rank-line {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+.player-blurb__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15rem 0.5rem;
+  margin-bottom: 0.6rem;
+  font-size: 13px;
+}
+
+.player-blurb__stat-key {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666666;
+}
+
+.player-blurb__stat-val {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.player-blurb__bio {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #333333;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* ── BADGE-SURFACE (text-only, no background) ── */
+.badge-surface {
+  font-family: 'Arial', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #333333;
+}
+
+.badge-surface::before {
+  content: '[';
+}
+
+.badge-surface::after {
+  content: ']';
+}
+
+/* ── BADGE-TIER (parenthetical italic) ── */
+.badge-tier {
+  font-family: 'Georgia', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: #333333;
+}
+
+.badge-tier::before {
+  content: '(';
+}
+
+.badge-tier::after {
+  content: ')';
+}
+
+/* ── CALENDAR TABLE ── */
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+}
+
+.calendar-table th {
+  font-family: 'Arial Narrow', 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #333333;
+  border-top: 1px solid #111111;
+  border-bottom: 1px solid #111111;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  background: transparent;
+}
+
+.calendar-table td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid #CCCCCC;
+  vertical-align: top;
+  background: transparent;
+}
+
+.calendar-table tr:last-child td {
+  border-bottom: 1px solid #111111;
+}
+
+.calendar-table tr.row--active td {
+  font-weight: 700;
+}
+
+.status-in-progress {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #111111;
+}
+
+.status-upcoming-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666666;
+}
+
+.td--dates {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ── UPCOMING MATCHES ── */
+.schedule-list {
+  border-top: 1px solid #111111;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 220px;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #CCCCCC;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+}
+
+.schedule-row__date-str {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111111;
+  display: block;
+}
+
+.schedule-row__time-str {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.schedule-row__player {
+  font-family: 'Georgia', serif;
+}
+
+.schedule-row__vs-txt {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #666666;
+  font-style: italic;
+  margin: 0 0.35rem;
+}
+
+.schedule-row__meta {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: right;
+}
+
+.schedule-row__round-txt {
+  font-weight: 700;
+  color: #333333;
+  margin-right: 0.4rem;
+}
+
+/* ── RECENT RESULTS ── */
+.results-list {
+  border-top: 1px solid #111111;
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 160px 1fr 180px;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #CCCCCC;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+}
+
+.result-row__date {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #666666;
+}
+
+.result-row__player--winner {
+  font-weight: 700;
+  color: #111111;
+}
+
+.result-row__player--loser {
+  color: #666666;
+}
+
+.result-row__score {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.result-row__meta {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: right;
+}
+
+/* ── VENUES ── */
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 2rem;
+  border-top: 1px solid #111111;
+  padding-top: 1.2rem;
+}
+
+.venue-blurb {
+  border-bottom: 1px solid #CCCCCC;
+  padding-bottom: 1rem;
+}
+
+.venue-blurb__dateline {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666666;
+  margin-bottom: 0.3rem;
+}
+
+.venue-blurb__name {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.venue-blurb__fact {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  color: #333333;
+}
+
+.venue-blurb__fact strong {
+  font-family: 'Courier New', monospace;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid #CCCCCC;
+  padding: 1.5rem 0;
+  margin-top: 0;
+  text-align: center;
+}
+
+.site-footer__text {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #666666;
+}
+
+/* ── RANK CHANGE ── */
+.rank-change {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #666666;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__right {
+    border-left: none;
+    border-top: 1px solid #CCCCCC;
+    padding-left: 0;
+    padding-top: 1.5rem;
+  }
+
+  .player-columns {
+    column-count: 2;
+  }
+
+  .schedule-row {
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .schedule-row__meta {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .result-row {
+    grid-template-columns: 100px 1fr 120px;
+    grid-template-rows: auto auto;
+  }
+
+  .result-row__meta {
+    grid-column: 1 / -1;
+  }
+
+  .venues-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calendar-table {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .player-columns {
+    column-count: 1;
+  }
+
+  .venues-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .masthead__title {
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+  }
+}

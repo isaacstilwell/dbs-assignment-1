@@ -1,0 +1,823 @@
+/* ============================================================
+   TENNIS TRACKER v7 — Japanese Minimalist
+   Inspired by Muji, Naoto Fukasawa, Kenya Hara's "Emptiness"
+   ============================================================ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --white:      #FFFFFF;
+  --near-black: #1A1A1A;
+  --vermillion: #C0392B;
+  --hairline:   #E8E8E8;
+  --muted:      #888888;
+  --loser:      #AAAAAA;
+
+  --font-sans:  system-ui, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--white);
+  color: var(--near-black);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 0;
+}
+
+/* ── Layout ── */
+.inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+
+.site-nav {
+  border-top: 1px solid var(--vermillion);
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-nav__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.site-nav__logo {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--near-black);
+}
+
+.site-nav__back {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.site-nav__back:hover {
+  color: var(--near-black);
+}
+
+.site-nav__version {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero {
+  background: var(--white);
+  padding: 7rem 0 6rem;
+  text-align: center;
+}
+
+.hero__rule {
+  width: 80px;
+  height: 1px;
+  background: var(--vermillion);
+  margin: 0 auto 2.5rem;
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1.05;
+  color: var(--near-black);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.hero__date {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4rem;
+}
+
+.hero__countdown {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hero__countdown-value {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--vermillion);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero__countdown-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   SECTION SCAFFOLD
+   ============================================================ */
+
+.section {
+  padding: 6rem 0;
+}
+
+.section__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--muted);
+  margin-bottom: 3rem;
+}
+
+/* ============================================================
+   MIAMI SPOTLIGHT
+   ============================================================ */
+
+.spotlight-wrap {
+  border-left: 3px solid var(--vermillion);
+  padding-left: 1.5rem;
+}
+
+.spotlight-meta {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.spotlight-meta__live {
+  color: var(--vermillion);
+  font-weight: 500;
+}
+
+.spotlight-row {
+  display: grid;
+  grid-template-columns: 6rem 1fr auto 1fr 5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+}
+
+.spotlight-row::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--vermillion);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.spotlight-row:hover::before {
+  transform: scaleX(1);
+}
+
+.spotlight-row__round {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.spotlight-row__players {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.spotlight-row__players--right {
+  justify-content: flex-end;
+}
+
+.spotlight-row__name {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.spotlight-row__name--winner {
+  color: var(--near-black);
+  font-weight: 500;
+}
+
+.spotlight-row__name--loser {
+  color: var(--loser);
+}
+
+.spotlight-row__score {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.85rem;
+  color: var(--near-black);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.spotlight-row__score--upcoming {
+  color: var(--muted);
+  font-style: italic;
+  font-family: var(--font-sans);
+}
+
+.spotlight-row__status {
+  font-size: 0.75rem;
+  text-align: right;
+  color: var(--muted);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dot-upcoming {
+  color: var(--vermillion);
+  font-size: 0.5rem;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Mini avatar */
+.mini-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--vermillion);
+  flex-shrink: 0;
+}
+
+.mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   PLAYER PROFILES
+   ============================================================ */
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 4rem 3rem;
+}
+
+.player-card {
+  position: relative;
+}
+
+.player-card__photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--vermillion);
+  margin-bottom: 1rem;
+}
+
+.player-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-card__name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--near-black);
+  margin-bottom: 0.5rem;
+}
+
+.player-card__rank {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--vermillion);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.player-card__stats {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 2;
+}
+
+.player-card__stats span {
+  display: block;
+}
+
+.player-card__stats .stat-val {
+  color: var(--near-black);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.rank-change {
+  font-size: 0.7rem;
+  letter-spacing: 0;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+.rank-change--up   { color: #2D8A4E; }
+.rank-change--down { color: var(--vermillion); }
+.rank-change--same { color: var(--muted); }
+
+/* ============================================================
+   TOURNAMENT CALENDAR
+   ============================================================ */
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table thead th {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+  text-align: left;
+  padding: 0 0 0.75rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.calendar-table tbody tr {
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+  transition: none;
+}
+
+.calendar-table tbody tr::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--vermillion);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.calendar-table tbody tr:hover::before {
+  transform: scaleX(1);
+}
+
+.calendar-table td {
+  padding: 1rem 0;
+  padding-right: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  vertical-align: middle;
+}
+
+.calendar-table .td--name {
+  font-weight: 400;
+  color: var(--near-black);
+}
+
+.calendar-table .td--location {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.calendar-table .td--dates {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.calendar-table .td--status {
+  font-size: 0.75rem;
+  text-align: right;
+  padding-right: 0;
+}
+
+.status-active {
+  color: var(--vermillion);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+}
+
+.status-upcoming {
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Surface & tier indicators */
+.surface-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+  flex-shrink: 0;
+}
+
+.surface-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+}
+
+.tier-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   UPCOMING MATCHES
+   ============================================================ */
+
+.upcoming-list {
+  /* rows separated by hairlines */
+}
+
+.upcoming-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr 5rem;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+}
+
+.upcoming-row::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--vermillion);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.upcoming-row:hover::before {
+  transform: scaleX(1);
+}
+
+.upcoming-row__date {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.upcoming-row__matchup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  flex-wrap: wrap;
+}
+
+.upcoming-row__vs {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.upcoming-row__meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.upcoming-row__round {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.upcoming-row__tournament {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ============================================================
+   RECENT RESULTS
+   ============================================================ */
+
+.results-list {
+  /* rows */
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto 1fr 5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+}
+
+.result-row::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--vermillion);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.result-row:hover::before {
+  transform: scaleX(1);
+}
+
+.result-row__date {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.result-row__player {
+  font-size: 0.875rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.result-row__player--winner {
+  color: var(--near-black);
+  font-weight: 500;
+}
+
+.result-row__player--winner::before {
+  content: '●';
+  color: var(--vermillion);
+  font-size: 0.45rem;
+  vertical-align: middle;
+  margin-right: 0.15rem;
+}
+
+.result-row__player--loser {
+  color: var(--loser);
+}
+
+.result-row__score {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.8rem;
+  color: var(--near-black);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.result-row__meta {
+  font-size: 0.7rem;
+  text-align: right;
+  color: var(--muted);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* ============================================================
+   VENUES
+   ============================================================ */
+
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 3.5rem 3rem;
+}
+
+.venue-card {
+  position: relative;
+}
+
+.venue-card__name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--near-black);
+  margin-bottom: 0.4rem;
+}
+
+.venue-card__location {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.venue-card__surface {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.venue-card__capacity {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.venue-card__capacity strong {
+  color: var(--near-black);
+  font-weight: 700;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+
+.site-footer__text {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 2;
+}
+
+.site-footer__link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.site-footer__link:hover {
+  color: var(--near-black);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .player-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2rem;
+  }
+
+  .result-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .result-row__date,
+  .result-row__meta {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .upcoming-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .upcoming-row__meta {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .spotlight-row {
+    grid-template-columns: 5rem 1fr auto 1fr;
+    gap: 0.5rem;
+  }
+
+  .spotlight-row__status {
+    display: none;
+  }
+
+  .calendar-table .td--location,
+  .calendar-table .td--dates {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .player-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .venues-grid {
+    grid-template-columns: 1fr;
+  }
+}
